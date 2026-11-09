@@ -1,0 +1,26 @@
+# HarnessLoop API 线示例（v0.2 / M2）
+# LLM 连接信息（model / api_base / api_key）写在同目录的 .env 中。
+
+dataset:
+  path: dataset.jsonl
+  kind: api
+
+harness:
+  path: harness.json
+
+loop:
+  max_rounds: 3
+  concurrency: 4
+  budget_usd_per_round: 0.50
+  seed: 42
+
+opt:
+  max_hypotheses: 3
+  mutator: rule        # rule | gepa | opik
+  gate:
+    strategy: pareto
+    min_gain_pp: 2.0
+    max_equal_change_fields: 1
+
+report:
+  out_dir: runs

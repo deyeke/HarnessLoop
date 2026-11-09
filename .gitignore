@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.eggs/
+.venv/
+venv/
+
+# HarnessLoop runtime artifacts
+runs/
+*.sqlite
+*.db
+!tests/fixtures/*.db
+
+# Tooling
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Editors / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Browser/test screenshots
+.screenshots/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Internal docs
+leader.txt

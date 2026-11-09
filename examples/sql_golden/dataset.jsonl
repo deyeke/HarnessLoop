@@ -1,0 +1,12 @@
+{"task_id": "sql_count_users", "kind": "sql", "question": "一共有多少用户？", "database": "toy.db", "gold_sql": "SELECT COUNT(*) FROM users"}
+{"task_id": "sql_users_without_tasks", "kind": "sql", "question": "列出没有任何任务的用户姓名。", "database": "toy.db", "gold_sql": "SELECT users.name FROM users LEFT JOIN tasks ON tasks.user_id = users.id WHERE tasks.id IS NULL"}
+{"task_id": "sql_done_tasks", "kind": "sql", "question": "已完成的任务有多少个？", "database": "toy.db", "gold_sql": "SELECT COUNT(*) FROM tasks WHERE done = 1"}
+{"task_id": "sql_users_in_cn", "kind": "sql", "question": "来自 CN 的用户有哪些？", "database": "toy.db", "gold_sql": "SELECT name FROM users WHERE country = 'CN'"}
+{"task_id": "sql_avg_order", "kind": "sql", "question": "订单的平均金额是多少？", "database": "toy.db", "gold_sql": "SELECT AVG(amount) FROM orders"}
+{"task_id": "sql_order_total_per_user", "kind": "sql", "question": "每个用户的订单总额，按用户名列出。", "database": "toy.db", "gold_sql": "SELECT users.name, SUM(orders.amount) FROM users JOIN orders ON orders.user_id = users.id GROUP BY users.name"}
+{"task_id": "sql_top_task_user", "kind": "sql", "question": "任务数量最多的用户名是谁？", "database": "toy.db", "gold_sql": "SELECT users.name FROM users JOIN tasks ON tasks.user_id = users.id GROUP BY users.id ORDER BY COUNT(*) DESC LIMIT 1"}
+{"task_id": "sql_large_orders", "kind": "sql", "question": "金额大于 100 的订单数量和总额。", "database": "toy.db", "gold_sql": "SELECT COUNT(*), SUM(amount) FROM orders WHERE amount > 100"}
+{"task_id": "sql_distinct_countries", "kind": "sql", "question": "用户分布在多少个不同的国家？", "database": "toy.db", "gold_sql": "SELECT COUNT(DISTINCT country) FROM users"}
+{"task_id": "sql_tasks_per_user", "kind": "sql", "question": "每个用户（包括没有任务的）的任务数。", "database": "toy.db", "gold_sql": "SELECT users.name, COUNT(tasks.id) FROM users LEFT JOIN tasks ON tasks.user_id = users.id GROUP BY users.id"}
+{"task_id": "sql_users_without_orders", "kind": "sql", "question": "没有下过订单的用户姓名。", "database": "toy.db", "gold_sql": "SELECT users.name FROM users LEFT JOIN orders ON orders.user_id = users.id WHERE orders.id IS NULL"}
+{"task_id": "sql_2026_big_spenders", "kind": "sql", "question": "2026 年订单总额超过 200 的用户姓名。", "database": "toy.db", "gold_sql": "SELECT users.name FROM users JOIN orders ON orders.user_id = users.id WHERE orders.created_at >= '2026-01-01' AND orders.created_at < '2027-01-01' GROUP BY users.id HAVING SUM(orders.amount) > 200"}

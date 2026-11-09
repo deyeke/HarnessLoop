@@ -1,0 +1,34 @@
+# HarnessLoop profile — SQL golden set example
+#
+# LLM 连接信息写在 .env（参考 .env.example）：
+#   HARNESSLOOP_MODEL / HARNESSLOOP_PROVIDER /
+#   HARNESSLOOP_API_BASE / HARNESSLOOP_API_KEY
+#
+# Run: python examples/sql_golden/build_db.py
+#      cp examples/sql_golden/.env.example examples/sql_golden/.env  # 填入 key
+#      harnessloop run --config examples/sql_golden/config.yaml
+
+temperature: 0.0
+
+dataset:
+  path: dataset.jsonl
+  kind: sql
+
+harness:
+  path: harness.json
+
+loop:
+  max_rounds: 3
+  concurrency: 4
+  budget_usd_per_round: 1.00
+  seed: 42
+
+opt:
+  max_hypotheses: 3
+  mutator: rule
+  gate:
+    strategy: pareto
+    min_gain_pp: 2.0
+
+report:
+  out_dir: runs

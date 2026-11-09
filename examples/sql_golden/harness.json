@@ -1,0 +1,43 @@
+{
+  "system_prompt": "你是 SQL 分析助手。根据数据库 schema 回答用户问题，只输出一条可执行的 SQL。",
+  "tools": [
+    {
+      "name": "run_sql",
+      "description": "在目标数据库上执行一条只读 SQL 并返回结果预览，用于自检查询是否正确。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "sql": {
+            "type": "string",
+            "description": "单条只读 SELECT 语句"
+          }
+        },
+        "required": ["sql"]
+      }
+    },
+    {
+      "name": "list_tables",
+      "description": "列出数据库中的全部表名。",
+      "parameters": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "describe_table",
+      "description": "查看指定表的列定义。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "table": {
+            "type": "string",
+            "description": "表名"
+          }
+        },
+        "required": ["table"]
+      }
+    }
+  ],
+  "few_shot_examples": [],
+  "output_format": "```sql\n<query>\n```"
+}

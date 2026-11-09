@@ -1,0 +1,63 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "harnessloop"
+version = "0.4.0"
+description = "Harness-only self-improvement loop for agents: evaluate, attribute, hypothesize, edit, re-evaluate."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "HarnessLoop contributors" }]
+keywords = ["llm", "agent", "prompt-optimization", "tool-schema", "evaluation"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+dependencies = [
+    "pydantic>=2.6",
+    "pydantic-settings>=2.2",
+    "litellm>=1.40,<2",
+    "sqlglot>=25,<31",
+    "aiosqlite>=0.20",
+    "PyYAML>=6.0",
+    "jsonschema>=4.20",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "ruff>=0.6",
+]
+ui = ["gradio>=4.0"]
+optimizers = ["gepa>=0.1", "opik_optimizer>=3.2"]
+executors = ["pydantic-ai>=2.0"]
+mcp = ["mcp>=2.0"]
+
+[project.scripts]
+harnessloop = "harnessloop.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["harnessloop*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+markers = [
+    "slow: end-to-end tests that bind a local port (deselect with -m 'not slow')",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]

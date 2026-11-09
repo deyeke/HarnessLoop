@@ -1,0 +1,36 @@
+# Plugin demo profile (M3): a custom attribution rule + a custom EditOp,
+# loaded without touching any core module.
+
+dataset:
+  path: ../api_state/dataset.jsonl
+  kind: api
+
+harness:
+  path: ../api_state/harness.json
+
+loop:
+  max_rounds: 2
+  concurrency: 4
+  budget_usd_per_round: 0.50
+  seed: 42
+
+opt:
+  max_hypotheses: 2
+  mutator: rule
+  gate:
+    strategy: pareto
+    min_gain_pp: 2.0
+
+plugins:
+  attribution:
+    - rules.py
+  labels:
+    - labels.py
+  edit_ops:
+    - edit_ops.py
+
+store:
+  backend: jsonl
+
+report:
+  out_dir: runs
